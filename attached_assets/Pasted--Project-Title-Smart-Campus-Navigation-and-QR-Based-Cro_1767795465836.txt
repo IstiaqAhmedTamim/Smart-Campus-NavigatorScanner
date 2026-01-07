@@ -1,0 +1,264 @@
+
+
+# Project Title
+
+**Smart Campus Navigation and QR-Based Crowd Density Monitoring System**
+
+---
+
+## Project Background
+
+In everyday university life, students frequently face difficulty determining which campus facilities—such as the library, cafeteria, laboratories, playgrounds, bus stops, or study rooms—are crowded at particular times. This often leads to wasted time, unnecessary movement between locations, and long waiting periods.
+
+Common challenges include:
+
+* The library reaching capacity during peak study hours
+* The cafeteria becoming extremely congested at lunchtime
+* Labs, game zones, study rooms, and common areas filling up unexpectedly
+* Students losing 30–40 minutes traveling between overcrowded locations
+
+Our team encountered these issues repeatedly, which led us to ask:
+**“What if students could see real-time crowd conditions before heading to a location?”**
+
+This idea inspired the development of a **QR-based, real-time campus crowd monitoring system**.
+
+---
+
+## Project Overview
+
+The **Smart Campus Navigation & Crowd Density Monitoring System** provides **live updates on crowd levels across all major campus locations** using **QR-code–based location verification**.
+
+Instead of manually selecting locations, **each campus entry point contains a unique QR code**. When a student scans the QR code using the mobile or desktop application, the system automatically updates the crowd count for that specific location.
+
+This ensures:
+
+* Accurate location confirmation
+* Reduced human error
+* Faster and more reliable crowd updates
+
+---
+
+## How the System Works (QR-Based Workflow)
+
+1. **Unique QR Code per Location**
+
+   * Each campus location (Library, Cafeteria, Lab, Study Room, etc.) has a **distinct QR code** attached at its entry/exit point.
+   * Each QR code contains a **location ID** mapped in the backend database.
+
+2. **QR Code Scan via App**
+
+   * Students scan the QR code using the app.
+   * The app extracts the `locationId` securely.
+
+3. **Automatic Crowd Update**
+
+   * The scanned location ID is sent to the backend server.
+   * The server:
+
+     * Registers the user’s entry into the location
+     * Updates the real-time crowd count
+
+4. **Exit Tracking**
+
+   * A second QR code (Exit QR) or rescan mechanism updates when the user leaves.
+   * Crowd count is decremented accordingly.
+
+5. **Live Visualization**
+
+   * Updated crowd data is instantly reflected on the React dashboard.
+   * Zones are color-coded:
+
+     * 🟢 Green – Low crowd
+     * 🟡 Yellow – Medium crowd
+     * 🔴 Red – High crowd
+
+---
+
+## Frontend Technology Stack
+
+* React with TypeScript
+* React Hooks
+* Axios / Fetch API
+* QR Code Scanner Integration
+* Tailwind CSS / CSS Modules
+* React Router
+* Real-time refresh logic
+
+---
+
+## Backend Technology Stack
+
+* Java
+* Spring Boot
+* RESTful APIs
+* TCP Socket Networking
+* Multithreading & concurrency
+* Java Collections Framework
+* Serialization & File I/O
+
+---
+
+## System Architecture
+
+**QR Scan → React App → REST API → Spring Boot Server → Thread Engine → Socket Server → Serialization → React Dashboard**
+
+---
+
+## Core Features
+
+### 1. QR-Based Location Verification System
+
+* Manual location selection is **completely removed**
+* Users verify their presence by scanning QR codes
+* Prevents fake or incorrect location updates
+* Each QR code uniquely identifies a campus zone
+
+**API Example:**
+
+```
+POST /qr/scan
+{
+  "userId": "0112310478",
+  "locationId": "LIB_01"
+}
+```
+
+---
+
+### 2. Real-Time Crowd Detection
+
+* Crowd count increases when a QR code is scanned at entry
+* Crowd count decreases on exit scan
+* No continuous tracking required
+* Event-driven updates improve performance
+
+---
+
+### 3. Crowd Density Engine
+
+A dedicated background thread runs every second to:
+
+* Recalculate live crowd counts
+* Detect overcrowded zones
+* Update visual indicators
+* Refresh recommendations
+
+**Thread Safety:**
+
+* Synchronized blocks prevent race conditions
+* Thread-safe collections ensure data consistency
+
+---
+
+### 4. React + TypeScript Dashboard
+
+Displays:
+
+* Live crowd statistics
+* QR-verified user count per location
+* Color-coded zone indicators
+* Campus map view
+* Best location recommendations
+* Real-time charts
+
+---
+
+### 5. Java Collections Usage
+
+* `HashMap<LocationId, HashSet<UserId>>` for crowd tracking
+* `HashSet` to prevent duplicate scans
+* `ArrayList` for active user sessions
+* `Comparator` to rank locations by crowd density
+
+---
+
+### 6. Serialization and Data Backup
+
+* Hourly backups of crowd history
+* Stored using `ObjectOutputStream`
+* File name: `crowd_data.ser`
+* Enables recovery after system restarts
+
+---
+
+### 7. Location Recommendation Engine
+
+* Ranks all locations based on crowd density
+* Suggests the best place to study or relax
+* Accessible via:
+
+```
+GET /recommend/best
+```
+
+---
+
+### 8. Multi-Client Networking Support
+
+* Socket server handles multiple users concurrently
+* Each QR scan request is processed in a separate thread
+* Supports Java clients and React dashboards
+
+---
+
+### 9. Optional Java Swing Desktop Client
+
+Provides:
+
+* QR scan simulation
+* Crowd visualization
+* Network testing and debugging
+
+---
+
+## Crowd Calculation Method
+
+Each location has a predefined capacity, for example:
+
+* Library: 100
+* Cafeteria: 60
+* Study Room: 40
+
+Crowd levels are categorized as:
+
+* **Low:** Below 50% capacity
+* **Medium:** 50% – 80% capacity
+* **High:** 80% or more capacity
+
+---
+
+## Zone Presence Detection (QR-Based)
+
+* Entry QR scan → User added to zone
+* Exit QR scan → User removed from zone
+* No GPS tracking required
+* Mirrors real-world systems used in:
+
+  * Airports
+  * Shopping malls
+  * Smart campuses
+
+---
+
+## User Interface and Authentication
+
+* Fully interactive web application
+* Pages: Home, Crowd Map, Recommendations, Statistics
+* Smooth navigation using React Router
+
+### Authentication Rules:
+
+* Must use `uiu.ac.bd` email **OR**
+* Valid student ID (9–11 digits, e.g., `0112310478`)
+* Unauthorized users cannot register or log in
+
+---
+
+## Design Guidelines
+
+* Clean, interactive UI
+* Ocean-inspired calming color themes
+* Mobile-friendly QR scanning
+* Responsive and student-friendly layout
+
+

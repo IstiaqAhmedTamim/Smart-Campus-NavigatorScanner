@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* OCEAN THEME PALETTE */
+  /* Primary: Deep Ocean Teal */
+  --primary: 192 90% 35%;
+  --primary-foreground: 210 40% 98%;
+
+  /* Secondary: Soft Seafoam */
+  --secondary: 180 50% 96%;
+  --secondary-foreground: 192 90% 25%;
+
+  /* Accent: Coral Reef (for highlights/actions) */
+  --accent: 14 85% 60%;
+  --accent-foreground: 210 40% 98%;
+
+  /* Backgrounds */
+  --background: 204 33% 97%; /* Very light blue-grey */
+  --foreground: 215 25% 27%; /* Deep slate blue */
+  
+  --card: 0 0% 100%;
+  --card-foreground: 215 25% 27%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 25% 27%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 192 90% 35%;
+
+  --radius: 1rem;
+
+  /* Custom Status Colors */
+  --status-low: 150 80% 40%;    /* Calm Green */
+  --status-medium: 40 90% 55%;  /* Warning Yellow/Orange */
+  --status-high: 0 85% 60%;     /* Alert Red */
+
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+ 
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+ 
+  --primary: 192 70% 50%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+ 
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+ 
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+ 
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+ 
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+ 
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 192 70% 50%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight text-slate-800;
+  }
+}
+
+/* Custom Animations */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-500;
+}

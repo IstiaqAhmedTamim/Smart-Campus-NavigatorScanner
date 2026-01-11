@@ -17,13 +17,29 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function Locations() {
-  const { data: locations, isLoading } = useLocations();
+  const { data: locations, isLoading, error } = useLocations();
   const [search, setSearch] = useState("");
 
   const filteredLocations = locations?.filter(loc => 
     loc.name.toLowerCase().includes(search.toLowerCase()) || 
     loc.description?.toLowerCase().includes(search.toLowerCase())
   );
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-3xl font-display font-bold text-slate-900">All Locations</h1>
+            <p className="text-slate-500 mt-1">Detailed capacity information and QR codes</p>
+          </div>
+          <div className="bg-white rounded-2xl border border-border shadow-sm p-12 text-center">
+            <p className="text-red-500">{error.message}</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

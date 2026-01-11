@@ -32,6 +32,24 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            if (req.headers.cookie) {
+              proxyReq.setHeader('Cookie', req.headers.cookie);
+            }
+          });
+          proxy.on('proxyRes', (proxyRes, req, res) => {
+            if (proxyRes.headers['set-cookie']) {
+              res.setHeader('Set-Cookie', proxyRes.headers['set-cookie']);
+            }
+          });
+        },
+      },
+    },
     fs: {
       strict: true,
       deny: ["**/.*"],
